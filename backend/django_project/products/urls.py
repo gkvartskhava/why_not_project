@@ -4,7 +4,9 @@ from . import views
 
 
 urlpatterns = [
-    path('', views.product_alt_view),
-    path('<int:pk>/', views.product_alt_view),
+    path('', views.ProductListCreateApiView.as_view()),
+    path('<int:pk>/update/', views.ProductDetailApiView.as_view()),
+    path('<int:pk>/delete/', views.ProductDetailApiView.as_view()),
+    path('<int:pk>/', views.ProductDetailApiView.as_view())
 
 ]

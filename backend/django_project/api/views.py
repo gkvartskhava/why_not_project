@@ -8,13 +8,19 @@ from products.serializers import ProductSerializer
 
 @api_view(["POST"])
 def api_home(request, *args, **kwargs):
-    instance =Product.objects.all().order_by('?').first()
-    data = {}
+    serializer = ProductSerializer(data=request.data)
+    if serializer.is_valid(raise_exception=True):
+        print(serializer.data)
+        return Response(serializer.data)
+    return Response({"invlid":"not good data"},status=400)
+      
+    
+    
+    # instance =Product.objects.all().order_by('?').first()
+    # data = {}
 
-    if instance:
-        data = ProductSerializer(instance).data
-    #     data = model_to_dict(instance, fields=['id','title', 'content', 'price','sale_price'])
-    # else:
-    #     pass
-        return Response(data)
-    # return HttpResponse(data, headers = {"content-type": "aplication/json"})
+    # if instance:
+    #     data = ProductSerializer(instance).data
+   
+    #     return Response(data)
+   

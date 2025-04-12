@@ -1,11 +1,11 @@
 import requests
 
-endpoint = 'http://localhost:8000/api/products/2/update/'
+endpoint = 'http://localhost:8000/api/products/13/update/'
 
 data = {
     'title': "Hello tbilisi",
-    'content': 'tbilissi is a verry verry nice city',
-    'price': 4.00
+    'content': 'zugdidi is a verry verry nice city',
+    'price': 404.00
 }
 
 

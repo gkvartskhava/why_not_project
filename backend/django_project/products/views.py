@@ -32,18 +32,47 @@ class ProductDetailApiView(generics.RetrieveAPIView):
 #     queryset = Product.objects.all()
 #     serializer_class = ProductSerializer
 
-class ProdductMixinView(mixins.ListModelMixin,mixins.RetrieveModelMixin,generics.GenericAPIView):
+class ProdductMixinView(mixins.UpdateModelMixin,
+                        mixins.DestroyModelMixin,
+                        mixins.CreateModelMixin,
+                        mixins.ListModelMixin,
+                        mixins.RetrieveModelMixin,
+                        generics.GenericAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     lookup_field = "pk"
 
     def get(self,request, *args, **kwargs):
-        print(args,kwargs)
+        # print(args,kwargs)
         pk = kwargs.get("pk")
         if pk is not None:
             return self.retrieve(request, *args, **kwargs)
         
         return self.list(request, *args, **kwargs)
+    
+    def post(self, request, *args, **kwargs):
+
+        return self.create(request, *args, **kwargs)
+    
+    def put(self, request, *args, **kwargs):
+        return self.update(request, *args, **kwargs)
+
+    def patch(self, request, *args, **kwargs):
+        return self.partial_update(request, *args, **kwargs)
+    
+    def delete(self, request, *args, **kwargs):
+        return self.destroy(request, *args, **kwargs)
+
+    # def perform_create(self, serializer):
+    #     # serializer.save(user=self.request.user)
+        
+    #     title = serializer.validated_data.get('title')
+    #     content = serializer.validated_data.get('content') or None
+    #     if content is None:
+    #         content = "pushing all CRUD operations in single view "
+    #     serializer.save(content = content)
+    
+
 
 @api_view(['GET','POST'])
 def product_alt_view(request,pk=None, *args, **kwargs):

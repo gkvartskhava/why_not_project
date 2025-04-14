@@ -5,8 +5,8 @@ endpoint = 'http://localhost:8000/api/products/'
 
 data = {
     "title" : "deep thaughts",
-    
-    "price" : 100000
+    "content": "to be or not to be",
+    "price" : 500000
 }
 
 

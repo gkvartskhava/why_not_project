@@ -6,15 +6,23 @@ from .serializers import ProductSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
+from .permissions import IsStaffEditorPermission
 
 from django.shortcuts import get_object_or_404
+
+
+from api.authentication import TokenAuthentication
 
 class ProductListCreateApiView(generics.ListCreateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
 
-    authentication_classes = [authentication.SessionAuthentication]
-    permission_classes = [permissions.DjangoModelPermissions]
+    authentication_classes = [authentication.SessionAuthentication,TokenAuthentication,]
+    # permission_classes = [permissions.DjangoModelPermissions]
+
+    permission_classes = [permissions.IsAdminUser,
+                          
+                          IsStaffEditorPermission]
 
     def perform_create(self, serializer):
         # serializer.save(user=self.request.user)
@@ -28,6 +36,7 @@ class ProductListCreateApiView(generics.ListCreateAPIView):
 class ProductDetailApiView(generics.RetrieveAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+    # permission_classes = [IsStaffEditorPermission]
 
     # lookup_field = 'pk'
 

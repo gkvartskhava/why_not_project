@@ -7,10 +7,11 @@ class ProductSerializer(serializers.ModelSerializer):
     my_discount = serializers.SerializerMethodField(read_only=True)
     edit_url = serializers.SerializerMethodField(read_only=True)
     url = serializers.HyperlinkedIdentityField(view_name= 'product-detail',lookup_field="pk",)
+    email = serializers.EmailField(write_only=True)
 
     class Meta:
         model = Product
-        fields = ['url','edit_url',"pk",'title','content','price','sale_price','my_discount']
+        fields = ['email','url','edit_url',"pk",'title','content','price','sale_price','my_discount']
 
 
     def get_my_discount(self,obj):

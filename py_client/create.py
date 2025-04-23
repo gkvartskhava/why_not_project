@@ -7,9 +7,9 @@ headers = {
 }
 
 data = {
-    "title" : "deep thaughts with george",
+    "title" : "python is the best",
     "content": "to be or not to be",
-    "price" : 500000
+    "price" : 100
 }
 
 

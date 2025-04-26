@@ -21,20 +21,19 @@ class ProductListCreateApiView(StaffEditorPermissionMixin,generics.ListCreateAPI
 
     # authentication_classes = [authentication.SessionAuthentication,TokenAuthentication,]
     # permission_classes = [permissions.DjangoModelPermissions]
-
     # permission_classes = [permissions.IsAdminUser,IsStaffEditorPermission]
 
     def perform_create(self, serializer):
         # serializer.save(user=self.request.user)
-        
         # email = serializer.validated_data.pop('email')
-
-        
         title = serializer.validated_data.get('title')
         content = serializer.validated_data.get('content') or None
         if content is None:
             content = title
         serializer.save(content = content)
+
+    
+
 
 class ProductDetailApiView(generics.RetrieveAPIView,StaffEditorPermissionMixin):
     queryset = Product.objects.all()

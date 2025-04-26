@@ -17,7 +17,10 @@ class ProductSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Product
-        fields = ['user','url','edit_url',"pk",'title','content','price','sale_price','my_discount']  # 'email'
+        fields = [#'user',
+                  'url','edit_url',"pk",'title',
+                  #'name',
+                  'content','price','sale_price','my_discount']  # 'email'
 
 
 

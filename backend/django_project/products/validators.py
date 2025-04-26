@@ -12,9 +12,10 @@ from rest_framework.validators import UniqueValidator
 
 def validate_title_no_hello(value):
     if "robot" in value.lower():
-        raise serializers.ValidationError(f'Robot is not alowed')
+        raise serializers.ValidationError(f'{value} is not alowed')
     
     return value
 
 
-unique_product_title = UniqueValidator(queryset=Product.objects.all())
+unique_product_title = UniqueValidator(queryset=Product.objects.all(), lookup='iexact')
+

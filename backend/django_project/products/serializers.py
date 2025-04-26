@@ -14,9 +14,21 @@ class ProductSerializer(serializers.ModelSerializer):
         fields = ['email','url','edit_url',"pk",'title','content','price','sale_price','my_discount']
 
 
+    # def create(self, validated_data):
+    #     # return Product.objects.create(**validated_data)
+    #     # email = validated_data.pop('email')
+    #     obj = super().create(validated_data)
+
+    #     # print(email,obj)
+    #     return obj
+    
+    # def update(self,instance,validated_data):
+    #     instance.title = validated_data.get('title')
+    #     return super().update(instance,validated_data)
+
     def get_my_discount(self,obj):
         return obj.get_discount()
-    
+
     def get_edit_url(self,obj):
 
         request = self.context.get('request')

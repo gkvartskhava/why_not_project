@@ -29,9 +29,15 @@ class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = ['owner',
-                  'url','edit_url',"pk",'title',
+                  'url',
+                  'edit_url',
+                  "pk",
+                  'title',
                   #'name',
-                  'content','price','sale_price',
+                  'content',
+                  'price',
+                  'sale_price',
+                  'public'
                   # 'my_discount','my_user_data',
                     # 'related_products'
                     ]  # 'email'

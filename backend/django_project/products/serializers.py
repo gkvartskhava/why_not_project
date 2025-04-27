@@ -5,16 +5,23 @@ from rest_framework.reverse import reverse
 from . import validators
 from api.serializers import UserPublicserializer
 
+
+
+class ProductInlineSerializer(serializers.Serializer):
+    url = serializers.HyperlinkedIdentityField(view_name= 'product-detail',lookup_field="pk", read_only = True)
+    title = serializers.CharField(read_only=True)
+
 class ProductSerializer(serializers.ModelSerializer):
 
     owner = UserPublicserializer(source = 'user',read_only = True)
 
-    my_user_data = serializers.SerializerMethodField(read_only = True)
-    my_discount = serializers.SerializerMethodField(read_only=True)
+    # my_user_data = serializers.SerializerMethodField(read_only = True)
+    # my_discount = serializers.SerializerMethodField(read_only=True)
     edit_url = serializers.SerializerMethodField(read_only=True)
     url = serializers.HyperlinkedIdentityField(view_name= 'product-detail',lookup_field="pk")
 
     title = serializers.CharField(validators=[validators.validate_title_no_hello,validators.unique_product_title])
+    # related_products = ProductInlineSerializer(source = 'user.product_set.all', read_only = True, many=True)
 
     # name = serializers.CharField(source='title', read_only = True)
     # email = serializers.EmailField(source = 'user.email',read_only=True)
@@ -24,7 +31,10 @@ class ProductSerializer(serializers.ModelSerializer):
         fields = ['owner',
                   'url','edit_url',"pk",'title',
                   #'name',
-                  'content','price','sale_price','my_discount','my_user_data']  # 'email'
+                  'content','price','sale_price',
+                  # 'my_discount','my_user_data',
+                    # 'related_products'
+                    ]  # 'email'
 
 
 
@@ -48,10 +58,7 @@ class ProductSerializer(serializers.ModelSerializer):
     #     instance.title = validated_data.get('title')
     #     return super().update(instance,validated_data)
 
-    def get_my_user_data(self,obj):
-        return {
-            'username':obj.user.username
-        }
+   
 
     def get_edit_url(self,obj):
 
@@ -63,3 +70,8 @@ class ProductSerializer(serializers.ModelSerializer):
     
     def get_my_discount(self,obj):
         return obj.get_discount()
+    
+    def get_my_user_data(self,obj):
+        return {
+            'username':obj.user.username
+        }

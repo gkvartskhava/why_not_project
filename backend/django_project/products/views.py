@@ -45,7 +45,7 @@ class ProductListCreateApiView(UserQuerySetMixin,StaffEditorPermissionMixin,gene
     #     return qs.filter(user=request.user)
 
 
-class ProductDetailApiView(UserQuerySetMixin,generics.RetrieveAPIView,StaffEditorPermissionMixin):
+class ProductDetailApiView(StaffEditorPermissionMixin,UserQuerySetMixin,generics.RetrieveAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     # permission_classes = [permissions.IsAdminUser,IsStaffEditorPermission]
@@ -59,7 +59,7 @@ class ProductDetailApiView(UserQuerySetMixin,generics.RetrieveAPIView,StaffEdito
 
 
 
-class ProductUpdateApiView(UserQuerySetMixin,generics.UpdateAPIView,StaffEditorPermissionMixin):
+class ProductUpdateApiView(UserQuerySetMixin,StaffEditorPermissionMixin,generics.UpdateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     # permission_classes = [permissions.IsAdminUser,IsStaffEditorPermission]
@@ -73,7 +73,7 @@ class ProductUpdateApiView(UserQuerySetMixin,generics.UpdateAPIView,StaffEditorP
         return super().perform_update(serializer)
     
 
-class ProductDeleteApiView(UserQuerySetMixin,generics.DestroyAPIView,StaffEditorPermissionMixin):
+class ProductDeleteApiView(UserQuerySetMixin,StaffEditorPermissionMixin,generics.DestroyAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     lookup_field = 'pk'

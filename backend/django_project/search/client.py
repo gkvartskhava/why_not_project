@@ -2,6 +2,7 @@
 from algoliasearch.search.client import SearchClientSync
 from algoliasearch_django import algolia_engine
 
+
 def get_client():
     client = SearchClientSync("UO647ZSSUT", "7d4b34609d91ccbb9a947881d462495b")
     return client
@@ -22,6 +23,9 @@ def perform_search(query, **kwargs):
         tags = kwargs.pop("tags") or []
         if len(tags) != 0:
             params['tagFilters'] = tags
+    index_filters = [f"{k}:{v}" for k,v in kwargs.items() if v]
+    if len(index_filters) != 0:
+        params['facetFilters'] = index_filters
     result = client.search(
     search_method_params={
         "requests": [

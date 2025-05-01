@@ -26,6 +26,8 @@ class ProductSerializer(serializers.ModelSerializer):
     # name = serializers.CharField(source='title', read_only = True)
     # email = serializers.EmailField(source = 'user.email',read_only=True)
 
+    body = serializers.CharField(source = 'content')
+
     class Meta:
         model = Product
         fields = ['owner',
@@ -34,7 +36,7 @@ class ProductSerializer(serializers.ModelSerializer):
                   "pk",
                   'title',
                   #'name',
-                  'content',
+                  'body',
                   'price',
                   'sale_price',
                   'public'

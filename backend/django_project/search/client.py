@@ -13,31 +13,58 @@ def get_index(index_name='gio_Product'):
     return index
 
 
-
 def perform_search(query, **kwargs):
-    index = get_index()
-    params = {}
     client = get_client()
-    tags = ''
+    params = {}
+
+    # Handle tags
     if 'tags' in kwargs:
         tags = kwargs.pop("tags") or []
-        if len(tags) != 0:
+        if tags:
             params['tagFilters'] = tags
-    index_filters = [f"{k}:{v}" for k,v in kwargs.items() if v]
-    if len(index_filters) != 0:
+
+    # Handle facet filters
+    index_filters = [f"{k}:{v}" for k, v in kwargs.items() if v]
+    if index_filters:
         params['facetFilters'] = index_filters
-    result = client.search(
-    search_method_params={
-        "requests": [
-            {
-                "indexName": "gio_Product",
-                "query": query,
+
+    # Perform the search
+        search_method_params = {
+            "requests": [
+                {
+                    "indexName": "gio_Product",
+                    "query": query,
+                },
+            ],
+        }
+        result = client.search(search_method_params)
+
+        return result
+
+# def perform_search(query, **kwargs):
+#     index = get_index()
+#     params = {}
+#     client = get_client()
+#     tags = ''
+#     if 'tags' in kwargs:
+#         tags = kwargs.pop("tags") or []
+#         if len(tags) != 0:
+#             params['tagFilters'] = tags
+#     index_filters = [f"{k}:{v}" for k,v in kwargs.items() if v]
+#     if len(index_filters) != 0:
+#         params['facetFilters'] = index_filters
+#     result = client.search(
+#     search_method_params={
+#         "requests": [
+#             {
+#                 "indexName": "gio_Product",
+#                 "query": query,
                
-            },
-        ],
-    },
-)
-    return result
+#             },
+#         ],
+#     },
+# )
+#     return result
 
 
 

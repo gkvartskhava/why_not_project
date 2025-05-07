@@ -7,7 +7,8 @@ from  . import client
 
 
 
-class SearchListView(generics.GenericAPIView):
+class SearchOldListView(generics.GenericAPIView):
+    
     def get(self, request, *args, **kwargs):
         user = None
         if request.user.is_authenticated:
@@ -22,9 +23,9 @@ class SearchListView(generics.GenericAPIView):
         return Response(results)
 
 
-class SearchListOldView(generics.ListAPIView):
-    queryset = Product.objects.all()
-    serializer_class = ProductSerializer
+class SearchListView(generics.ListAPIView):
+    # queryset = Product.objects.all()
+    # serializer_class = ProductSerializer
 
     def get_queryset(self, *args, **kwargs):
         qs =  super().get_queryset(*args, **kwargs)

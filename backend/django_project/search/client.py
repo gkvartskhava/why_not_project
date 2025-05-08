@@ -2,45 +2,50 @@
 from algoliasearch.search.client import SearchClientSync
 from algoliasearch_django import algolia_engine
 
+import urllib.parse
 
 def get_client():
     client = SearchClientSync("UO647ZSSUT", "7d4b34609d91ccbb9a947881d462495b")
     return client
 
 def get_index(index_name='gio_Product'):
-    client = SearchClientSync("UO647ZSSUT", "7d4b34609d91ccbb9a947881d462495b")
+    client = get_client()
     index = client.search_single_index(index_name)
     return index
 
 
 def perform_search(query, **kwargs):
     client = get_client()
-    params = {}
+    tag_filters = kwargs.pop("tags", None)
+    facet_filters = [f"{k}:{v}" for k, v in kwargs.items() if v]
 
-    # Handle tags
-    if 'tags' in kwargs:
-        tags = kwargs.pop("tags") or []
-        if tags:
-            params['tagFilters'] = tags
+    raw_params = {
+        "query": query
+    }
 
-    # Handle facet filters
-    index_filters = [f"{k}:{v}" for k, v in kwargs.items() if v]
-    if index_filters:
-        params['facetFilters'] = index_filters
+    if tag_filters:
+        if isinstance(tag_filters, list):
+            raw_params["tagFilters"] = ",".join(tag_filters)
+        else:
+            raw_params["tagFilters"] = tag_filters
 
-    # Perform the search
-        search_method_params = {
-            "requests": [
-                {
-                    "indexName": "gio_Product",
-                    "query": query,
-                },
-            ],
-        }
-        result = client.search(search_method_params)
+    if facet_filters:
+        raw_params["facetFilters"] = facet_filters
 
-        return result
+    # Convert raw_params to URL-encoded string
+    encoded_params = urllib.parse.urlencode(raw_params, doseq=True)
 
+    search_method_params = {
+        "requests": [
+            {
+                "indexName": "gio_Product",
+                "params": encoded_params
+            }
+        ]
+    }
+
+    result = client.search(search_method_params)
+    return result
 
 
 

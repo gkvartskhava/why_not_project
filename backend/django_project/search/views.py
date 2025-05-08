@@ -24,8 +24,8 @@ class SearchOldListView(generics.GenericAPIView):
 
 
 class SearchListView(generics.ListAPIView):
-    # queryset = Product.objects.all()
-    # serializer_class = ProductSerializer
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
 
     def get_queryset(self, *args, **kwargs):
         qs =  super().get_queryset(*args, **kwargs)

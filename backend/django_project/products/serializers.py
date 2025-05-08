@@ -39,7 +39,8 @@ class ProductSerializer(serializers.ModelSerializer):
                   'body',
                   'price',
                   'sale_price',
-                  'public'
+                  'public',
+                  'path',
                   # 'my_discount','my_user_data',
                     # 'related_products'
                     ]  # 'email'

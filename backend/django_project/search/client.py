@@ -41,30 +41,9 @@ def perform_search(query, **kwargs):
 
         return result
 
-# def perform_search(query, **kwargs):
-#     index = get_index()
-#     params = {}
-#     client = get_client()
-#     tags = ''
-#     if 'tags' in kwargs:
-#         tags = kwargs.pop("tags") or []
-#         if len(tags) != 0:
-#             params['tagFilters'] = tags
-#     index_filters = [f"{k}:{v}" for k,v in kwargs.items() if v]
-#     if len(index_filters) != 0:
-#         params['facetFilters'] = index_filters
-#     result = client.search(
-#     search_method_params={
-#         "requests": [
-#             {
-#                 "indexName": "gio_Product",
-#                 "query": query,
-               
-#             },
-#         ],
-#     },
-# )
-#     return result
+
+
+
 
 
 

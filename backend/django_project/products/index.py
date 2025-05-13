@@ -12,7 +12,8 @@ class ProductIndex(AlgoliaIndex):
         'title',
         'body',
         'price',
-        'public'
+        'public',
+        'path',
         
     ]
 

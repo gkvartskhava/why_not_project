@@ -41,6 +41,7 @@ class ProductSerializer(serializers.ModelSerializer):
                   'sale_price',
                   'public',
                   'path',
+                  'endpoint',
                   # 'my_discount','my_user_data',
                     # 'related_products'
                     ]  # 'email'

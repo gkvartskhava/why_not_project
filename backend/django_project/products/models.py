@@ -24,7 +24,6 @@ class ProductManager(models.Manager):
     def get_queryset(self, *args, **kwargs):
         return ProductQuerySet(self.model, using = self._db)
 
-
     def search(self,query,user=None):
         return self.get_queryset().search(query,user=user)
 
@@ -39,6 +38,14 @@ class Product(models.Model):
     public = models.BooleanField(default=True)
 
     objects = ProductManager()
+
+    
+    def get_absolute_url(self):
+        return f"/api/products/{self.pk}/"
+
+    @property
+    def endpoint(self):
+        return self.get_absolute_url()
 
     @property
     def path(self):

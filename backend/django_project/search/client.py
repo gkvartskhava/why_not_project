@@ -8,15 +8,6 @@ import urllib.parse
 def get_client():
     return algolia_engine.client
 
-# def get_client():
-#     client = SearchClientSync("UO647ZSSUT", "7d4b34609d91ccbb9a947881d462495b")
-#     return client
-
-# def get_index(index_name='gio_Product'):
-#     client = get_client()
-#     index = client.search_single_index(index_name)
-#     return index
-
 
 # def perform_search(query, **kwargs):
 #     client = get_client()

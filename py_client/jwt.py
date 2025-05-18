@@ -11,8 +11,8 @@ class JWTClient:
     Use a dataclass decorator
     to simply the class construction
     """
-    access:str = None
-    refresh:str = None
+    access = None
+    refresh = None
     # ensure this matches your simplejwt config
     header_type: str = "Bearer"
     # this assumesy ou have DRF running on localhost:8000
@@ -91,7 +91,7 @@ class JWTClient:
         Without exposing password(s) during the
         collection process.
         """
-        endpoint = f"{self.base_endpoint}/token/" 
+        endpoint = f"{self.base_endpoint}/api/token/" 
         username = input("What is your username?\n")
         password = getpass("What is your password?\n")
         r = requests.post(endpoint, json={'username': username, 'password': password}) 
@@ -122,7 +122,7 @@ class JWTClient:
         data = {
             "token": f"{self.access}"
         }
-        endpoint = f"{self.base_endpoint}/token/verify/" 
+        endpoint = f"{self.base_endpoint}/api/token/verify/" 
         r = requests.post(endpoint, json=data)
         return r.status_code == 200
     
@@ -147,7 +147,7 @@ class JWTClient:
         data = {
             "refresh": f"{self.refresh}"
         }
-        endpoint = f"{self.base_endpoint}/token/refresh/" 
+        endpoint = f"{self.base_endpoint}/api/token/refresh/" 
         r = requests.post(endpoint, json=data, headers=headers)
         if r.status_code != 200:
             self.clear_tokens()

@@ -175,8 +175,8 @@ REST_FRAMEWORK = {
 # environment variables -> django 
 
 ALGOLIA = {
-    'APPLICATION_ID': 'UO647ZSSUT',
-    'API_KEY': '7d4b34609d91ccbb9a947881d462495b',
+    'APPLICATION_ID': '1PF9H19ZCK',
+    'API_KEY': '228807366326b5d960b0220a13685f54',
     'INDEX_PREFIX':'gio'
 }
 

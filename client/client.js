@@ -153,10 +153,10 @@ validateJWTToken()
 // getProductList()
 
 
-const searchClient = algoliasearch('4IHLYNCMBJ', '2d98a3c1e68d4f81bbba206ca075cfbb');
+const searchClient = algoliasearch('1PF9H19ZCK', '228807366326b5d960b0220a13685f54');
 
 const search = instantsearch({
-  indexName: 'cfe_Product',
+  indexName: 'gio_Product',
   searchClient,
 });
 

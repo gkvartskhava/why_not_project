@@ -1,3 +1,10 @@
+from pathlib import Path
+import os
+
+from dotenv import load_dotenv
+
+load_dotenv()
+
 """
 Django settings for django_project project.
 
@@ -25,14 +32,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-jefu@$-e%at83(fixkd90lghjt601a1nsm%6ygmrmmbbx=)t2n'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = []
 
-ROOT_URLCONF = 'cfehome.urls'
+ROOT_URLCONF = 'django_project.urls'
 CORS_URLS_REGEX = r"^/api/.*"
 CORS_ALLOWED_ORIGINS = []
 
@@ -175,8 +182,8 @@ REST_FRAMEWORK = {
 # environment variables -> django 
 
 ALGOLIA = {
-    'APPLICATION_ID': '1PF9H19ZCK',
-    'API_KEY': '228807366326b5d960b0220a13685f54',
+    'APPLICATION_ID': os.getenv('APPLICATION_ID'),
+    'API_KEY': os.getenv('API_KEY'),
     'INDEX_PREFIX':'gio'
 }
 

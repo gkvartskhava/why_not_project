@@ -1,5 +1,5 @@
 from rest_framework import permissions
-import requests
+
 
 from .permissions import IsStaffEditorPermission
 
@@ -12,7 +12,7 @@ class UserQuerySetMixin():
     user_field = 'user'
     allow_staff_view = False
     def get_queryset(self, *args, **kwargs):
-        user = self.request.user
+        user = getattr(self, 'request', None).user if hasattr(self, 'request') else None
         lookup_data = {}
         lookup_data[self.user_field] = user
         qs = super().get_queryset(*args, **kwargs)

@@ -1,7 +1,7 @@
 
 # Django REST API Project
 
-This is a Django-based REST API project with multiple integrated apps and features like JWT authentication, Algolia search, and CORS support. I made this project to sum up my knowledge in Django Rest Framework.
+This is a Django-based REST API project with multiple integrated apps and features like JWT authentication, Algolia search, and CORS support. I made this project to sum up my knowledge in Django Rest Framework. This project was made according to  youtube channel called "CodingEntrepreneurs".
 
 ## Features
 
